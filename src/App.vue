@@ -4,7 +4,8 @@
     <ul v-if="products && products.length">
       <li v-for="product in products" v-bind:key="product">
         <p>
-          <strong>Title {{ decorateProduct(product.title) }}</strong>
+          Title
+          <rails-add :title="product.title" :link="product.id"></rails-add>
         </p>
         <p>desc {{ product.description }}</p>
         <p>price {{ product.price }}</p>
@@ -20,7 +21,7 @@
 <script>
 import axios from "axios";
 import Nav from "./components/Nav";
-import decorateProduct from "./utils/ProductsUtils";
+import RailsAddition from "./components/RailsAddition";
 
 export default {
   data() {
@@ -30,9 +31,9 @@ export default {
     };
   },
   components: {
-    "nav-comp": Nav
+    "nav-comp": Nav,
+    "rails-add": RailsAddition
   },
-
   mounted() {
     axios
       .get("http://localhost:3000/api/v1/products")
